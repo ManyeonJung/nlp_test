@@ -15,7 +15,7 @@ import requests
     MeCabAPI를 초기화할 때 URL을 넣거나 default URL을 사용할 수 있음
     
 '''
-URL = "http://127.0.0.1:5001"
+URL = "http://*.*.*.*:5001"
 
 class MeCabAPI:
     def __init__(self,url=URL):
@@ -47,7 +47,6 @@ class MeCabAPI:
                 for each in response:
                     result.append([s for s,t in each])
                 return result
-            return result
         except Exception as err:
             logging.warning(err)
 
@@ -71,7 +70,8 @@ class MeCabAPI:
         except Exception as err:
             logging.warning(err)
 
-
-m = MeCabAPI()
-pprint(m.morph(general_list))
-#print(m.pos("밥먹고싶다"))
+if __name__ == "__main__":
+    m = MeCabAPI()
+    print(m.tagger("아버지가방에들어가신다"))
+    pprint(m.morph(["테스트 문자열입니다.", "이것도 해석해보시지"]))
+    pprint(m.pos("아버지가방에들어가신다"))
